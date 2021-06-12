@@ -12,6 +12,9 @@ class Simulation:
     def add_entity(self, entity):
         self._entities.append(entity)
 
+    def remove_entity(self, entity):
+        self._entities.remove(entity)
+
     def start(self):
         pass
 

@@ -1,29 +1,32 @@
 from src.Force import Force
+from src.UnitFactory import UnitFactory
 from src.calc.Point import Point
 from src.simulation.Simulation import Simulation
-from src.view.UI import UI
 from src.simulation.World import World
-from src.view.WorldViewer import WorldViewer
 from src.strategy.StrategyFactory import StrategyFactory
-from src.UnitFactory import UnitFactory
+from src.view.UI import UI
+from src.view.WorldViewer import WorldViewer
 
 CONFIG = {
-    "window": {"width": 640, "height": 480},
-    "world": {"width": 100, "height": 100},
+    "window": {"width": 800, "height": 800},
+    "world": {"width": 200, "height": 200},
     "forces": [
         {
             "name": "Plague",
             "strategy": "simple_strategy",
+            # "strategy": "expand_and_attack_horus",
             "color": 0xFF0000,
             "units": [
-                {"type": "Corruptor", "y": 70, "x": 71},
-                {"type": "Corruptor", "y": 70, "x": 72},
-                {"type": "Deathbringer", "y": 70, "x": 73},
-                {"type": "Deathbringer", "y": 70, "x": 74},
-                {"type": "Horus", "y": 70, "x": 70},
-                {"type": "Horus", "y": 80, "x": 80},
-                {"type": "Horus", "y": 80, "x": 81},
-                {"type": "Horus", "y": 80, "x": 81},
+                {"type": "Corruptor", "y": 170, "x": 171},
+                {"type": "Corruptor", "y": 170, "x": 172},
+                {"type": "Deathbringer", "y": 170, "x": 173},
+                {"type": "Deathbringer", "y": 170, "x": 174},
+                {"type": "Horus", "y": 170, "x": 170},
+                {"type": "Horus", "y": 180, "x": 180},
+                {"type": "Horus", "y": 180, "x": 181},
+                {"type": "Horus", "y": 181, "x": 180},
+                # {"type": "Horus", "y": 180, "x": 181},
+                # {"type": "Horus", "y": 180, "x": 181},
             ],
             "colors": {
                 "Corruptor": 0xFF0000,
@@ -36,9 +39,10 @@ CONFIG = {
             "strategy": "expand_and_attack_horus",
             "color": 0x0000FF,
             "units": [
-                {"type": "Horus", "y": 20, "x": 20},
-                {"type": "Horus", "y": 20, "x": 80},
-                {"type": "Horus", "y": 80, "x": 20},
+                {"type": "Horus", "y": 40, "x": 40},
+                {"type": "Horus", "y": 40, "x": 150},
+                {"type": "Horus", "y": 150, "x": 40},
+                # {"type": "Horus", "y": 150, "x": 45},
             ],
             "colors": {
                 "Corruptor": 0x0000FF,
@@ -68,8 +72,8 @@ def load(config):
 
 def run_simulation(config):
     simulation = load(config)
-    ui = UI()
-    world_viewer = WorldViewer(ui.world_surface())
+    ui = UI(width=config["window"]["width"], height=config["window"]["height"])
+    world_viewer = WorldViewer(ui.world_surface(config["world"]["width"], config["world"]["height"]))
     simulation.add_entity(world_viewer)
     simulation.add_entity(ui)
     simulation.start()

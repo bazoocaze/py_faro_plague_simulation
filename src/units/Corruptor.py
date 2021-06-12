@@ -16,6 +16,7 @@ class Corruptor(Unit):
 
     def process(self, context: SimulationContext):
         if self.is_destroyed():
+            context.simulation.remove_entity(self)
             return
 
         self._world = context.world

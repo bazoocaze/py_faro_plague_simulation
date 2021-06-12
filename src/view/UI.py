@@ -26,15 +26,6 @@ class UI:
 
         pygame.display.flip()
 
-    def _draw_gradient(self):
-        rect = pygame.Rect(self._window.get_rect().center, (0, 0)).inflate(*([min(self._window.get_size()) // 2] * 2))
-        pixel_array = pygame.PixelArray(self._window)
-        for x in range(rect.width):
-            u = x / (rect.width - 1)
-            color = (round(u * 255), 0, round((1 - u) * 255))
-            pixel_array[rect.left + x, rect.top:rect.bottom] = color
-        pixel_array.close()
-
     def _initialize(self):
         pygame.init()
         self._window = pygame.display.set_mode((self._width, self._height))
@@ -53,5 +44,5 @@ class UI:
         self._finished = True
         pygame.quit()
 
-    def world_surface(self):
-        return Surface(self._window, 100, 100)
+    def world_surface(self, virtual_width, virtual_height):
+        return Surface(virtual_width, virtual_height, self._window)

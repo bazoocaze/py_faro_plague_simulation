@@ -1,3 +1,5 @@
+import random
+
 from src.calc import geometry
 
 
@@ -32,6 +34,11 @@ class UnitSelector:
 
     def of_type(self, unit_type: str):
         self._iterator = self._filter_unit_type(self._iterator, unit_type)
+        return self
+
+    def random(self):
+        items = list(self._iterator)
+        self._iterator = iter(random.sample(items, len(items)))
         return self
 
     def or_else(self, default_value):
